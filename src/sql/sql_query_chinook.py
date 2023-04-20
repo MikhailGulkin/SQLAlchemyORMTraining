@@ -1,16 +1,17 @@
-from sqlalchemy import select, func, and_, or_, extract, desc, case, null, text
+from sqlalchemy import select, func, and_, or_, extract, desc, case, null
 from sqlalchemy.ext.automap import AutomapBase
 from sqlalchemy.orm import Session
 
+from src.sql.base_sql_query import BaseSQLQuery
 
-class SQLQueryChinook:
+
+class SQLQueryChinook(BaseSQLQuery):
     """
     All questions get from https://github.com/brooksquil/sqlite-assignment-chinook
     """
 
-    def __init__(self, base: AutomapBase, session: Session):
-        self.base = base
-        self.session = session
+    def __init__(self, base: AutomapBase, session: Session) -> None:
+        super().__init__(base=base, session=session)
         self.employee = base.classes['Employee']
         self.customer = base.classes['Customer']
         self.invoice = base.classes['Invoice']
@@ -47,7 +48,7 @@ class SQLQueryChinook:
 
     def brasil_customers_invoices(self):
         """
-        Provide a query showing the Invoices of customers who are from Brazil.
+        Provide a query showing the Invoices for customers who are from Brazil.
         The resultant table should show the customer's full name,
         Invoice ID, Date of the invoice and billing country.
         :return:
@@ -166,7 +167,7 @@ class SQLQueryChinook:
 
     def invoice_37_line_item_count(self):
         """
-        Looking at the InvoiceLine table, provide a query that COUNTs the number of line items for Invoice ID 37.
+        Looking at the InvoiceLine table, provide a query that COUNT the number of line items for Invoice ID 37.
         :return:
         """
         query = select(
@@ -177,7 +178,7 @@ class SQLQueryChinook:
     def line_items_per_invoice(self):
         """
         Looking at the InvoiceLine table,
-        provide a query that COUNTs the number of line items for each Invoice. HINT: GROUP BY
+        provide a query that COUNT the number of line items for each Invoice. HINT: GROUP BY
         :return:
         """
         query = select(
@@ -367,7 +368,7 @@ class SQLQueryChinook:
 
     def top_3_artists(self):
         """
-        Provide a query that shows the top 3 best selling artists.
+        Provide a query that shows the top 3 best-selling artists.
         :return:
         """
         query = select(

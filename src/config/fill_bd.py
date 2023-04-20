@@ -1,11 +1,11 @@
 from sqlalchemy import text
 
-from src.db_setup import build_session
+from src.config.db_setup import build_session
 
 
 def fill():
     session = build_session()
-    with open('../Chinook/Chinook.sql') as file:
+    with open('../../Northwind/Northwind.sql') as file:
         session.execute(
             text(
                 file.read()
