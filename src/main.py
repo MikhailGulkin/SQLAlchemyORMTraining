@@ -1,4 +1,4 @@
-from sqlalchemy import text, MetaData, inspect, select
+from sqlalchemy import MetaData
 from sqlalchemy.ext.automap import automap_base
 
 from src.config.db_setup import build_session, create_engine
