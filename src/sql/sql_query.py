@@ -1,4 +1,4 @@
-from sqlalchemy import select, func, and_, or_, extract, desc
+from sqlalchemy import select, func, and_, or_, extract, desc, case, null, text
 from sqlalchemy.ext.automap import AutomapBase
 from sqlalchemy.orm import Session
 
@@ -68,11 +68,34 @@ class SQLQueryChinook:
         :return:
         """
         query = select(
-            self.employee,
+            self.employee.FirstName,
+            self.employee.LastName
         ). \
             where(self.employee.Title == 'Sales Support Agent')
         return self.session.execute(query).fetchall()
 
+    def sales_agent_with_case_when(self):
+        query = select(
+            self.employee.EmployeeId,
+            func.count(),
+            case(
+                (self.employee.EmployeeId == 4, 1),
+                (self.employee.EmployeeId == 5, 1),
+                (self.employee.EmployeeId == 3, 1),
+                else_=null()
+            )
+        ). \
+            group_by(self.employee.EmployeeId)
+        print(query)
+        return self.session.execute(query).fetchall()
+
+    #
+    # case(
+    #     (self.employee.EmployeeId == 4, self.invoice.Total), else_=null()
+    # ).label('Margaret_Park'). \
+    #     case(
+    #     (self.employee.EmployeeId == 5, self.invoice.Total), else_=null()
+    # ).label('Steve_Johnson')
     def unique_invoice_countries(self):
         """
         Provide a query showing a unique/distinct list of billing countries from the Invoice table.
@@ -371,6 +394,6 @@ class SQLQueryChinook:
         ).join(self.track, self.track.MediaTypeId == self.media_type.MediaTypeId). \
             join(self.invoice_line, self.invoice_line.TrackId == self.track.TrackId). \
             group_by(self.media_type.Name). \
-            order_by(desc('count')).\
+            order_by(desc('count')). \
             limit(1)
         return self.session.execute(query).fetchall()

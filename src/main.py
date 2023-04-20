@@ -16,12 +16,12 @@ def main():
 
     sql_obj = SQLQueryChinook(base=Base, session=session)
 
-    res = sql_obj.top_media_type()
+    res = sql_obj.sales_agent_with_case_when()
 
-    # print(len(res))
-    # print(res)
-    # for line in res:
-    #     print(line)
+    print(len(res))
+    print(res)
+    for line in res:
+        print(line)
 
 
 if __name__ == '__main__':
