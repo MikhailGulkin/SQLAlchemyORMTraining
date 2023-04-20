@@ -13,7 +13,7 @@ def main():
     Base = automap_base(metadata=metadata)
 
     Base.prepare()
-   
+
     sql_obj = SQLQueryNorthwind(base=Base, session=session)
 
     # res = sql_obj.sales_agent_with_case_when()

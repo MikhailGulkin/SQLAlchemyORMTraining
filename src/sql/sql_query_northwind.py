@@ -5,6 +5,9 @@ from src.sql.base_sql_query import BaseSQLQuery
 
 
 class SQLQueryNorthwind(BaseSQLQuery):
+    """
+    All questions from https://www.geeksengine.com/database/problem-solving/northwind-queries-part-1.php
+    """
     def __init__(self, base: AutomapBase, session: Session) -> None:
         super().__init__(base=base, session=session)
 
