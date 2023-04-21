@@ -16,12 +16,12 @@ def main():
 
     sql_obj = SQLQueryNorthwind(base=Base, session=session)
 
-    # res = sql_obj.sales_agent_with_case_when()
-    #
-    # print(len(res))
-    # print(res)
-    # for line in res:
-    #     print(line)
+    res = sql_obj.current_product_list()
+
+    print(len(res))
+    print(res, end='\n\n')
+    for line in res[0:10]:
+        print(line)
 
 
 if __name__ == '__main__':
