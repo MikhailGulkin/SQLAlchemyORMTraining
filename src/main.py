@@ -16,7 +16,7 @@ def main():
 
     sql_obj = SQLQueryNorthwind(base=Base, session=session)
 
-    res = sql_obj.current_product_list()
+    res = sql_obj.quarterly_orders_by_product()
 
     print(len(res))
     print(res, end='\n\n')
